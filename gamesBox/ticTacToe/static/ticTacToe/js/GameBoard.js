@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 
 const GameBoard = () => {
-    game = window.game; // Get the game object from the global scope
+    const game = window.gameData; // Get the gameJata JSON from the global scope
 
     // State to hold the game state (Tic-Tac-Toe board)
     const [gameState, setGameState] = useState(game.board_state);

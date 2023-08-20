@@ -16,5 +16,8 @@ class GameBoardView(DetailView):
 
         # Try to get an existing game or create a new one if not found
         game, created = TicTacToeGame.objects.get_or_create(id=game_id)
-        game.board_state = list(game.board_state)
+        if game.board_state == "":
+            game.board_state = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+        else:
+            list(game.board_state)
         return game

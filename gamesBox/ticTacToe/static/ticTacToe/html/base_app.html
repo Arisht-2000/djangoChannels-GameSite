@@ -19,20 +19,25 @@
 
     <!-- Create a dictionary with game data and pass it as JSON -->
     <script>
-        window.game = JSON.parse('{{ game_json|escapejs }}');
-        {% comment %}
-            window.gameData = {
-                id: {{ game.id }},
-                board_state: "{{ game.board_state }}",
-                current_player: "{{ game.current_player }}",
-                winner: "{{ game.winner }}",
-                is_draw: {{ game.is_draw|yesno:"true,false" }},
-            };
-        {% endcomment %}
+        window.gameData = {
+            id: "{{ game.id }}",
+            board_state: "{{ game.board_state }}",
+            current_player: "{{ game.current_player }}",
+            winner: "{{ game.winner }}",
+            is_draw: "{{ game.is_draw }}",
+        };
+        window.gameData.id = JSON.parse(window.gameData.id);
+        window.gameData.board_state = JSON.parse(window.gameData.board_state.replace(/&#x27;/g, '"'));
+        window.gameData.current_player = window.gameData.current_player;
+        window.gameData.winner = window.gameData.winner;
+        window.gameData.is_draw = window.gameData.is_draw == "True" ? true : false;
+        //window.gameData = JSON.stringify(window.gameData);
     </script>
 
     <!-- Include React app scripts -->
     <script src="{% static 'ticTacToe/js/bundle.js' %}"></script>
+    {% block innercontent %}
+    {% endblock innercontent %}
 
     <!-- Include Bootstrap JavaScript from a CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
