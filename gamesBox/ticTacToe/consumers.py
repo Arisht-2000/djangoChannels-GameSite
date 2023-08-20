@@ -5,7 +5,7 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from .models import TicTacToeGame
 
 
-class GameConsumer(AsyncWebsocketConsumer):
+class AsyncGameBoardConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.game_id = self.scope["url_route"]["kwargs"]["game_id"]
         self.game_group_name = f"game_{self.game_id}"
