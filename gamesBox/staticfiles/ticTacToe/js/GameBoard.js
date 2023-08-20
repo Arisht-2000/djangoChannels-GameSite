@@ -10,9 +10,7 @@ const GameBoard = () => {
 
     useEffect(() => {
         ws.onmessage = event => {
-            console.log("recived in ws");
             const data = JSON.parse(event.data);
-            console.log("parsed");
             console.log("setting states");
             setGameState(data.game_state);
             setPlayerCharacter(data.player_character);
@@ -28,14 +26,11 @@ const GameBoard = () => {
         if (gameState[index] === " " && playerCharacter !== null) {
             const newGameState = [...gameState];
             newGameState[index] = playerCharacter;
-            console.log("making");
             const data_dump = {
                 index: index,
                 game_state: newGameState,
                 playerCharacter: playerCharacter,
             }
-            console.log("made data = ");
-            console.log(data_dump);
             ws.send(JSON.stringify({
                 data: data_dump,
             }));

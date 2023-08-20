@@ -17,7 +17,6 @@
 {% block content %}
     <!-- Create a dictionary with game data and pass it as JSON -->
     <script>
-        console.log("{{ game }}");
         window.gameData = {
             id: "{{ game.id }}",
             board_state: "{{ game.board_state }}",
@@ -30,7 +29,6 @@
         window.gameData.current_player = window.gameData.current_player;
         window.gameData.winner = window.gameData.winner;
         window.gameData.is_draw = window.gameData.is_draw == "True" ? true : false;
-        //window.gameData = JSON.stringify(window.gameData);
     </script>
 
 
