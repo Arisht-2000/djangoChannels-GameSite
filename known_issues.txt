@@ -3,6 +3,4 @@ in ticTacToe app:
 
 
 in chat app:
-    Firefox can’t establish a connection to the server at ws://localhost:8000/ws/chat/hello/. hello:64:21
-        Chat socket closed unexpectedly
-        ValueError: No route found for path 'ws/chat/hello/'
+    not showing sent/recived texts

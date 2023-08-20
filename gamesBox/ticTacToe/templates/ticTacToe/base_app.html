@@ -1,8 +1,13 @@
+{% load static %}
+
 <!DOCTYPE HTML>
 <html lang="en">
 
 <head>
-
+<!-- Include CSRF token as a global JavaScript variable -->
+<script>
+    const csrfToken = "{{ csrf_token }}";
+</script>
 <!-- Required meta tags -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
