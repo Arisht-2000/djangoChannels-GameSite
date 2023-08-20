@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 
 const GameBoard = () => {
-    const gameData = window.gameData;
+    const gameData = window.game;
 
     const [gameState, setGameState] = useState(gameData.board_state);
     const [playerCharacter, setPlayerCharacter] = useState(null);

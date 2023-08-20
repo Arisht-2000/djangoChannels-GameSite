@@ -1,6 +1,2 @@
 in ticTacToe app:
     gameState.map is not a function (in gamesBox\ticTacToe\static\ticTacToe\js\bundle.js) (in gamesBox\ticTacToe\static\ticTacToe\js\GameBoard.js)
-
-
-in chat app:
-    not showing sent/recived texts
