@@ -1,2 +1,2 @@
 in ticTacToe app:
-    gameBoard not showing up in browser
+    gameBoard not working properly
