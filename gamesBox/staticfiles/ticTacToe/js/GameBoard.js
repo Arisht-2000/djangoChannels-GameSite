@@ -1,18 +1,15 @@
 import React, { useEffect, useState, useMemo } from 'react';
 
-const GameBoard = ({ game }) => {
-    // State to hold the game state (Tic-Tac-Toe board)
-    const [gameState, setGameState] = useState(game.board_state);
+const GameBoard = () => {
+    const gameData = window.gameData;
 
-    // State to hold the player's character ('X' or 'O')
+    const [gameState, setGameState] = useState(gameData.board_state);
     const [playerCharacter, setPlayerCharacter] = useState(null);
 
-    // Memoize the WebSocket object using game.id as dependency
-    const ws = useMemo(() => new WebSocket(`ws://${window.location.host}/ws/game/${game.id}/`), [game.id]);
+    const ws = useMemo(() => new WebSocket(`ws://${window.location.host}/ws/game/${gameData.id}/`), [gameData.id]);
 
-    // Effect to set up WebSocket event listeners and handle cleanup
     useEffect(() => {
-        // Event listener for WebSocket messages
+        // WebSocket event listener for incoming messages
         ws.onmessage = event => {
             const data = JSON.parse(event.data);
             setGameState(data.game_state);
@@ -25,16 +22,12 @@ const GameBoard = ({ game }) => {
         };
     }, [ws]);
 
-    // Function to handle cell clicks on the game board
     const handleCellClick = (index) => {
-        // Check if the clicked cell is empty and the player's character is set
         if (gameState[index] === null && playerCharacter !== null) {
-            // Create a new game state array and update the clicked cell
             const newGameState = gameState.slice();
             newGameState[index] = playerCharacter;
             setGameState(newGameState);
 
-            // Send the move to the server via WebSocket
             ws.send(JSON.stringify({
                 row: Math.floor(index / 3),
                 col: index % 3,
@@ -42,14 +35,13 @@ const GameBoard = ({ game }) => {
         }
     };
 
-    // Render the Tic-Tac-Toe game board using the game state
     return (
-        <div className="container mt-5"> {/* Bootstrap container for spacing */}
+        <div className="container mt-5">
             <div className="row justify-content-center">
-                <div className="col-8"> {/* Main content column */}
+                <div className="col-8">
                     <div className="row">
                         {gameState.map((cell, index) => (
-                            <div key={index} className="col-4"> {/* Each cell occupies 1/3 of the available space */}
+                            <div key={index} className="col-4">
                                 <div
                                     className="cell border rounded d-flex align-items-center justify-content-center"
                                     onClick={() => handleCellClick(index)}
