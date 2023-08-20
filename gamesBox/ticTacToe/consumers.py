@@ -26,7 +26,7 @@ class AsyncGameBoardConsumer(AsyncWebsocketConsumer):
             return game
 
         data = json.loads(text_data)["data"]
-        index = data["index"] - 1  # Get the index of the move
+        index = data["index"]  # Get the index of the move
         game_state = data["game_state"]
         playerCharacter = data["playerCharacter"]
         game = await get_game(self.game_id, index)

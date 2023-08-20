@@ -17,6 +17,7 @@
 {% block content %}
     <!-- Create a dictionary with game data and pass it as JSON -->
     <script>
+        console.log("{{ game }}");
         window.gameData = {
             id: "{{ game.id }}",
             board_state: "{{ game.board_state }}",
