@@ -1,5 +1,5 @@
 in ticTacToe app:
-    gameData is undefined (in gamesBox\ticTacToe\static\ticTacToe\js\GameBoard.js line 6)
+    gameState.map is not a function (in gamesBox\ticTacToe\static\ticTacToe\js\bundle.js) (in gamesBox\ticTacToe\static\ticTacToe\js\GameBoard.js)
 
 
 in chat app:
