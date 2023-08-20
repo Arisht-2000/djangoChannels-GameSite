@@ -1,7 +1,7 @@
 from django.urls import path
 
-from ticTacToe.views import Home
+from ticTacToe.views import GameBoardView
 
 urlpatterns = [
-    # path("/", Home.as_view()),
+    path("game/<int:game_id>/", GameBoardView.as_view(), name="game_board"),
 ]
