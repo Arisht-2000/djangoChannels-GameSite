@@ -19,7 +19,7 @@
 
     <!-- Create a dictionary with game data and pass it as JSON -->
     <script>
-        window.game = game
+        window.game = JSON.parse('{{ game_json|escapejs }}');
         {% comment %}
             window.gameData = {
                 id: {{ game.id }},
