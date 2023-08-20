@@ -1,14 +1,16 @@
 import React, { useEffect, useState, useMemo } from 'react';
 
-const GameBoard = ({ game }) => {
+const GameBoard = ({ gameData }) => {
+    const gameData = window.gameData; // Use the game data dictionary from window
+
     // State to hold the game state (Tic-Tac-Toe board)
-    const [gameState, setGameState] = useState(game.board_state);
+    const [gameState, setGameState] = useState(gameData.board_state);
 
     // State to hold the player's character ('X' or 'O')
     const [playerCharacter, setPlayerCharacter] = useState(null);
 
     // Memoize the WebSocket object using game.id as dependency
-    const ws = useMemo(() => new WebSocket(`ws://${window.location.host}/ws/game/${game.id}/`), [game.id]);
+    const ws = useMemo(() => new WebSocket(`ws://${window.location.host}/ws/game/${gameData.id}/`), [gameData.id]);
 
     // Effect to set up WebSocket event listeners and handle cleanup
     useEffect(() => {
@@ -23,7 +25,7 @@ const GameBoard = ({ game }) => {
         return () => {
             ws.close();
         };
-    }, [game]);
+    }, [ws]);
 
     // Function to handle cell clicks on the game board
     const handleCellClick = (index) => {

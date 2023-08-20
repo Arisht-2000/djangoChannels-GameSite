@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.
 class TicTacToeGame(models.Model):
-    board_state = models.CharField(max_length=9)
+    board_state = models.CharField(max_length=9, default=" " * 9)
     current_player = models.CharField(max_length=1, default="X")  # 'X' or 'O'
     winner = models.CharField(max_length=1, null=True, blank=True)  # 'X', 'O', or None
     is_draw = models.BooleanField(default=False)
