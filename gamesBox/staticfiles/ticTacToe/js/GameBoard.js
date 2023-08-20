@@ -23,7 +23,7 @@ const GameBoard = ({ game }) => {
         return () => {
             ws.close();
         };
-    }, [ws]);
+    }, [game]);
 
     // Function to handle cell clicks on the game board
     const handleCellClick = (index) => {

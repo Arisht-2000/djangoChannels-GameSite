@@ -7,6 +7,7 @@ module.exports = {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'static', 'ticTacToe', 'js'),  // Output path
     },
+    mode: 'development',  // Set the build mode to 'development' or 'production'
     module: {
         rules: [
             {
