@@ -8,7 +8,7 @@ from .models import TicTacToeGame
 # Create your views here.
 class GameBoardView(DetailView):
     model = TicTacToeGame
-    template_name = "tictactoe_app/game_board.html"
+    template_name = "ticTacToe/game_board.html"
     context_object_name = "game"
 
     def get_object(self, queryset=None):
