@@ -25,10 +25,6 @@ const GameBoard = () => {
     }, [ws]);
 
     const handleCellClick = (index) => {
-        console.log("clicked");
-        console.log("gameState"); console.log(gameState);
-        console.log("gameState[index]"); console.log(gameState[index]);
-        console.log("playerCharacter"); console.log(playerCharacter);
         if (gameState[index] === " " && playerCharacter !== null) {
             const newGameState = [...gameState];
             newGameState[index] = playerCharacter;
@@ -43,9 +39,7 @@ const GameBoard = () => {
             ws.send(JSON.stringify({
                 data: data_dump,
             }));
-            console.log("sent to ws");
         }
-        console.log("if statement not satisfied");
     };
 
     const renderCells = () => {
