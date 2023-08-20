@@ -19,5 +19,5 @@ class GameBoardView(DetailView):
         if game.board_state == "":
             game.board_state = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
         else:
-            list(game.board_state)
+            game = list(game.board_state)
         return game

@@ -33,12 +33,15 @@ const GameBoard = () => {
             const newGameState = [...gameState];
             newGameState[index] = playerCharacter;
             console.log("making");
+            const data_dump = {
+                index: index,
+                game_state: newGameState,
+                playerCharacter: playerCharacter,
+            }
+            console.log("made data = ");
+            console.log(data_dump);
             ws.send(JSON.stringify({
-                data: {
-                    index: index,
-                    game_state: newGameState,
-                    playerCharacter: playerCharacter,
-                },
+                data: data_dump,
             }));
             console.log("sent to ws");
         }

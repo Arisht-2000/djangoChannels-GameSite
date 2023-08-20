@@ -8,17 +8,16 @@ class TicTacToeGame(models.Model):
     winner = models.CharField(max_length=1, null=True, blank=True)  # 'X', 'O', or None
     is_draw = models.BooleanField(default=False)
 
-    def make_move(self, row, col):
-        if (
-            self.board_state[row * 3 + col] == " "
-            and not self.winner
-            and not self.is_draw
-        ):
+    def make_move(self, index):
+        if self.board_state == "":
+            board_list = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+        else:
             board_list = list(self.board_state)
-            board_list[row * 3 + col] = self.current_player
+        if board_list[index] == " " and not self.winner and not self.is_draw:
+            board_list[index] = self.current_player
             self.board_state = "".join(board_list)
 
-            if self.check_winner(self.current_player, row, col):
+            if self.check_winner(self.current_player, index // 3, index % 3):
                 self.winner = self.current_player
             elif " " not in self.board_state:
                 self.is_draw = True

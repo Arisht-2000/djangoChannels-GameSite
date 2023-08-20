@@ -1,6 +1,7 @@
 import json
 
 from channels.generic.websocket import AsyncWebsocketConsumer
+from channels.db import database_sync_to_async
 
 from .models import TicTacToeGame
 
@@ -18,25 +19,32 @@ class AsyncGameBoardConsumer(AsyncWebsocketConsumer):
         await self.channel_layer.group_discard(self.game_group_name, self.channel_name)
 
     async def receive(self, text_data):
-        data = json.loads(text_data)
-        index = data["index"]
-        _row = index // 3
-        _col = index % 3
+        @database_sync_to_async
+        def get_game(game_id, index):
+            game = TicTacToeGame.objects.get(pk=game_id)
+            game.make_move(index)
+            return game
+
+        data = json.loads(text_data)["data"]
+        index = data["index"] - 1  # Get the index of the move
         game_state = data["game_state"]
         playerCharacter = data["playerCharacter"]
-        game = TicTacToeGame.objects.get(pk=self.game_id)
+        game = await get_game(self.game_id, index)
 
-        game.make_move(_row, _col)  # Call the make_move method on the game instance
-
-        await self.channel_layer.group_send(
-            self.game_group_name,
-            {
-                "type": "game_update",
-                "game_state": game.board_state,
-                "index": index,
-                "playerCharacter": playerCharacter,
-            },
-        )
+        if game.board_state == "":
+            game.board_state = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+        else:
+            game.board_state = list(game.board_state)
+        if game.board_state == game_state:
+            await self.channel_layer.group_send(
+                self.game_group_name,
+                {
+                    "type": "game_update",
+                    "game_state": game.board_state,
+                    "index": index,
+                    "playerCharacter": playerCharacter,
+                },
+            )
 
     async def game_update(self, event):
         game_state = event["game_state"]

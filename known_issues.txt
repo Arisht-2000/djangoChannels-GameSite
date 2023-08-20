@@ -1,2 +1,2 @@
 in ticTacToe app:
-    gameBoard not working properly
+    ValueError: No route found for path 'ws/game//'.
